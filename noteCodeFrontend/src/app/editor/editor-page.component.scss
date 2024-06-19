@@ -1,0 +1,181 @@
+@import "../../partials/responsives";
+
+$btnw: 100px;
+$lh: 25px;
+$btnbg: #ced6e1;
+$ntcblue: #406aff;
+
+.container {
+  height: 100%;
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .logo {
+      margin-top: 10px;
+    }
+    .title {
+      text-align: center;
+      margin: 5px auto;
+    }
+  }
+  .editor-container {
+    margin: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
+    width: 75%;
+    height: 75%;
+    @include tablet {
+      width: 80%;
+      height: 80%;
+    }
+    @include mobile {
+      width: 95%;
+      height: 80%;
+    }
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    .editor {
+      height: 100%;
+    }
+    .editor-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      .left {
+        height: $lh;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        @include mobile {
+          margin: auto;
+        }
+        .dropdown-button {
+          position: relative;
+          background-color: $btnbg;
+          font-size: small;
+          width: $btnw;
+          border-radius: 20px;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          .content {
+            width: 100%;
+            border-radius: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: inherit;
+            .text {
+              max-width: 70%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            svg {
+              transform: rotate(180deg);
+              transition: transform 500ms ease-in-out;
+            }
+            input[type="checkbox"] {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              &:focus ~ ul {
+                display: flex;
+              }
+              &:focus + label > svg {
+                transform: rotate(360deg);
+              }
+            }
+            ul {
+              position: absolute;
+              display: none;
+              flex-direction: column;
+              list-style: none;
+              gap: 2px;
+              z-index: -1;
+              width: inherit;
+              max-height: 30vh;
+              overflow: scroll;
+              background-color: inherit;
+              padding: 5px 5px 12px;
+              bottom: 50%;
+              border-radius: 5px 5px 0 0;
+              &::-webkit-scrollbar {
+                display: none;
+              }
+              li:hover {
+                background-color: $ntcblue;
+                color: white;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+      .right {
+        height: $lh;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        gap: 20px;
+        @include mobile {
+          margin: auto;
+        }
+        .link-wrapper {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          cursor: pointer;
+          &:hover {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
+            border-radius: 5px;
+          }
+          .link {
+            color: #364153;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            direction: rtl;
+            width: 15vw;
+          }
+        }
+        .share-button {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          justify-content: center;
+          background-color: $ntcblue;
+          font-size: small;
+          color: white;
+          width: $btnw;
+          border: 0;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.vs {
+  background-color: #fffffe;
+}
+.hc-light {
+  background-color: white;
+}
+.vs-dark {
+  background-color: #1e1e1e;
+}
+.hc-black {
+  background-color: black;
+}
+.disabled {
+  background-color: #364153 !important;
+  cursor: not-allowed !important;
+}
+.active {
+  background-color: $ntcblue;
+  color: white;
+}
