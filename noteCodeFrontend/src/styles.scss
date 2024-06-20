@@ -8,6 +8,9 @@
 }
 :root {
   height: 100vh;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   body {
     height: 100%;
     background-image: url("../public/Hero-Background-notecode@2x.png"),
@@ -28,18 +31,4 @@
       color: inherit;
     }
   }
-}
-
-.dimmer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 70%;
-  z-index: 998;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

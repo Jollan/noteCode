@@ -1,27 +1,43 @@
 @import "../../partials/responsives";
 
 $btnw: 100px;
-$lh: 25px;
+$btnmw: 120px;
+$btnh: 25px;
+$btnmh: 35px;
 $btnbg: #ced6e1;
 $ntcblue: #406aff;
 
 .container {
   height: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .head {
     display: flex;
     flex-direction: column;
     align-items: center;
     .logo {
       margin-top: 10px;
+      @include mobileLandscape {
+        margin-bottom: 5px;
+      }
     }
     .title {
       text-align: center;
       margin: 5px auto;
+      @include mobile {
+        line-height: 30px;
+      }
+      @include mobileLandscape {
+        display: none;
+      }
+      @include tabletLandscape {
+        display: none;
+      }
     }
   }
   .editor-container {
-    margin: auto;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
     width: 75%;
     height: 75%;
     @include tablet {
@@ -29,8 +45,31 @@ $ntcblue: #406aff;
       height: 80%;
     }
     @include mobile {
-      width: 95%;
-      height: 80%;
+      width: 85%;
+      height: 85%;
+    }
+    @include mobileLandscape {
+      width: 90%;
+      height: 85%;
+    }
+    @include tabletLandscape {
+      width: 90%;
+      height: 90%;
+    }
+    @include adjustLandscape {
+      width: 90%;
+      height: 85%;
+    }
+    margin: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
+    position: relative;
+    .loader {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     padding: 15px;
     border-radius: 10px;
@@ -43,20 +82,24 @@ $ntcblue: #406aff;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: space-between;
-      .left {
-        height: $lh;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+      justify-content: center;
+      .dropdowns {
+        height: $btnh;
         @include mobile {
-          margin: auto;
+          height: $btnmh;
+          justify-content: center;
         }
+        display: flex;
+        flex: 1;
+        gap: 10px;
         .dropdown-button {
           position: relative;
           background-color: $btnbg;
           font-size: small;
           width: $btnw;
+          @include mobile {
+            width: $btnmw;
+          }
           border-radius: 20px;
           z-index: 1;
           display: flex;
@@ -73,11 +116,11 @@ $ntcblue: #406aff;
               overflow: hidden;
               text-overflow: ellipsis;
             }
-            svg {
+            img {
               transform: rotate(180deg);
               transition: transform 500ms ease-in-out;
             }
-            input[type="checkbox"] {
+            input {
               position: absolute;
               width: 100%;
               height: 100%;
@@ -85,7 +128,7 @@ $ntcblue: #406aff;
               &:focus ~ ul {
                 display: flex;
               }
-              &:focus + label > svg {
+              &:focus + label > img {
                 transform: rotate(360deg);
               }
             }
@@ -115,45 +158,47 @@ $ntcblue: #406aff;
           }
         }
       }
-      .right {
-        height: $lh;
+      .link-wrapper {
         display: flex;
-        flex-wrap: wrap-reverse;
-        gap: 20px;
+        gap: 8px;
+        align-items: center;
+        width: 20vw;
+        height: $btnh;
         @include mobile {
-          margin: auto;
-        }
-        .link-wrapper {
-          display: flex;
-          gap: 8px;
-          align-items: center;
-          cursor: pointer;
-          &:hover {
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
-            border-radius: 5px;
-          }
-          .link {
-            color: #364153;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            direction: rtl;
-            width: 15vw;
-          }
-        }
-        .share-button {
-          display: flex;
-          gap: 8px;
-          align-items: center;
+          width: 80%;
+          height: $btnmh;
           justify-content: center;
-          background-color: $ntcblue;
-          font-size: small;
-          color: white;
-          width: $btnw;
-          border: 0;
-          border-radius: 20px;
-          cursor: pointer;
         }
+        cursor: pointer;
+        &:hover {
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.356);
+          border-radius: 5px;
+        }
+        .link {
+          color: #364153;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          direction: rtl;
+        }
+      }
+      .share-button {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        background-color: $ntcblue;
+        color: white;
+        font-size: small;
+        width: $btnw;
+        height: $btnh;
+        @include mobile {
+          width: $btnmw;
+          height: $btnmh;
+        }
+        border: 0;
+        border-radius: 20px;
+        cursor: pointer;
       }
     }
   }

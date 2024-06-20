@@ -11,6 +11,7 @@ import { SnackbarComponent } from '../utility/snackbar/snackbar.component';
 import { LoaderService } from '../services/loader.service';
 import { LoaderComponent } from '../utility/loader/loader.component';
 import { environment } from '../../environments/environment';
+import { DimmerComponent } from '../dimmer/dimmer.component';
 
 type Theme = 'vs' | 'vs-dark' | 'hc-light' | 'hc-black';
 
@@ -23,6 +24,7 @@ type Theme = 'vs' | 'vs-dark' | 'hc-light' | 'hc-black';
     MonacoEditorModule,
     SnackbarComponent,
     LoaderComponent,
+    DimmerComponent
   ],
   providers: [NoteService],
   templateUrl: './editor-page.component.html',
@@ -147,7 +149,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
 
   message = signal<{
     content: string;
-    class: 'sb-success' | 'sb-error';
+    type: 'success' | 'error';
   } | null>(null);
 
   editorOptions: editor.IStandaloneEditorConstructionOptions & {
@@ -172,6 +174,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
       this.subscription.add(
         this.noteService.getNote(this.id).subscribe({
           next: (response) => {
+            this.loaderService.editorInit.set(false);
             this.link = `${environment.site}/${this.id}`;
             this.content = response.data.note.code;
             this.editorOptions = {
@@ -182,13 +185,13 @@ export class EditorPageComponent implements OnDestroy, OnInit {
           error: (error) => {
             this.message.set({
               content: error.error.message ?? this.defaultErrMsg,
-              class: 'sb-error',
+              type: 'error',
             });
           },
           complete: () => {
             this.message.set({
               content: 'Successfully.',
-              class: 'sb-success',
+              type: 'success',
             });
           },
         })
@@ -197,16 +200,19 @@ export class EditorPageComponent implements OnDestroy, OnInit {
   }
 
   onEditorInit(editor: editor.IStandaloneCodeEditor) {
+    this.loaderService.editorInit.set(true);
     editor.onDidChangeModelContent((event) => {
       if (!event.isFlush) this.modified.set(true);
     });
   }
 
   onChangeLanguage(language: Language) {
+    this.loaderService.editorInit.set(false);
     this.editorOptions = { ...this.editorOptions, language };
   }
 
   onChangeTheme(theme: Theme) {
+    this.loaderService.editorInit.set(false);
     localStorage.setItem('theme', theme);
     this.editorOptions = { ...this.editorOptions, theme };
   }
@@ -233,7 +239,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
           error: (error) => {
             this.message.set({
               content: error.error.message ?? this.defaultErrMsg,
-              class: 'sb-error',
+              type: 'error',
             });
           },
         })
@@ -244,13 +250,13 @@ export class EditorPageComponent implements OnDestroy, OnInit {
           error: (error) => {
             this.message.set({
               content: error.error.message ?? this.defaultErrMsg,
-              class: 'sb-error',
+              type: 'error',
             });
           },
           complete: () => {
             this.message.set({
               content: 'Code has been shared.',
-              class: 'sb-success',
+              type: 'success',
             });
           },
         })
@@ -263,12 +269,12 @@ export class EditorPageComponent implements OnDestroy, OnInit {
       await navigator.clipboard.writeText(link);
       this.message.set({
         content: 'Text copied to clipboard.',
-        class: 'sb-success',
+        type: 'success',
       });
     } catch (error) {
       this.message.set({
         content: 'Failed to copy text.',
-        class: 'sb-error',
+        type: 'error',
       });
     }
   }

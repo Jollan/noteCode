@@ -1,27 +1,34 @@
+@import "../../../partials/responsives";
+
 .sb-container {
   display: flex;
   justify-content: end;
+  @include mobile {
+    justify-content: center;
+  }
   .sb {
     position: fixed;
-    min-width: 350px;
+    min-width: 25vw;
+    padding: 10px;
     text-align: center;
-    border-radius: 2px;
-    padding: 16px;
     border-radius: 5px;
     z-index: 999;
     top: 10px;
     margin-right: 10px;
+    @include mobile {
+      margin: 0 10px;
+    }
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
 }
 
-.sb-error {
+.error {
   background-color: #e74c3c;
   color: #fff;
 }
 
-.sb-success {
+.success {
   background-color: #1abc9c;
   color: #28282b;
 }

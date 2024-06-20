@@ -1,51 +1,46 @@
-// .loader {
-//   width: 100%;
-//   height: 3px;
-//   background-color: #f3f3f3;
-//   overflow: hidden;
-//   position: relative;
-//   z-index: 999;
+.loader-bar {
+  position: fixed;
+  width: 30%;
+  height: 3px;
+  background-color: #3498db;
+  -webkit-animation: slide 800ms linear infinite;
+  animation: slide 800ms linear infinite;
+}
+.loader-spin {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  -webkit-animation: spin 800ms linear infinite;
+  animation: spin 800ms linear infinite;
+}
 
-//   .loader-bar {
-//     width: 30%;
-//     height: 100%;
-//     background-color: #3498db;
-//     position: absolute;
-//     -webkit-animation: slide 800ms linear infinite;
-//     animation: slide 800ms linear infinite;
-//   }
-// }
-
-// @-webkit-keyframes slide {
-//   0% {
-//     left: 0%;
-//   }
-//   100% {
-//     left: 100%;
-//   }
-// }
-
-// @keyframes slide {
-//   0% {
-//     left: 0%;
-//   }
-//   100% {
-//     left: 100%;
-//   }
-// }
-
-.loader {
-  .loader-spin {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 1s linear infinite;
-    margin: auto;
+@-webkit-keyframes slide {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes slide {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
   }
 }
 
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);

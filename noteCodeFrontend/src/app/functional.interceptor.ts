@@ -4,10 +4,10 @@ import { finalize } from 'rxjs';
 
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const loaderService = LoaderService.instance;
-  loaderService.loaded.set(false);
+  loaderService.fetched.set(false);
   return next(req).pipe(
     finalize(() => {
-      loaderService.loaded.set(true);
+      loaderService.fetched.set(true);
     })
   );
 };

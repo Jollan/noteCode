@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./snackbar.component.scss'],
 })
 export class SnackbarComponent {
-  @Input() message: string;
-  @Input() class: 'sb-success' | 'sb-error';
+  @Input({ required: true }) message: string;
+  @Input({ required: true }) type: 'success' | 'error';
 }

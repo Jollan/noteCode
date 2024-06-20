@@ -4,7 +4,8 @@ import { Injectable, signal } from '@angular/core';
 export class LoaderService {
   static instance: LoaderService;
 
-  loaded = signal(true);
+  fetched = signal(true);
+  editorInit = signal(false);
 
   constructor() {
     LoaderService.instance = this;
