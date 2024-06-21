@@ -8,9 +8,6 @@
 }
 :root {
   height: 100vh;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   body {
     height: 100%;
     background-image: url("../public/Hero-Background-notecode@2x.png"),
@@ -25,10 +22,5 @@
 
     font-optical-sizing: auto;
     font-style: normal;
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
   }
 }

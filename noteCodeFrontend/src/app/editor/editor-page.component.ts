@@ -11,7 +11,7 @@ import { SnackbarComponent } from '../utility/snackbar/snackbar.component';
 import { LoaderService } from '../services/loader.service';
 import { LoaderComponent } from '../utility/loader/loader.component';
 import { environment } from '../../environments/environment';
-import { DimmerComponent } from '../dimmer/dimmer.component';
+import { DimmerComponent } from '../utility/dimmer/dimmer.component';
 
 type Theme = 'vs' | 'vs-dark' | 'hc-light' | 'hc-black';
 
