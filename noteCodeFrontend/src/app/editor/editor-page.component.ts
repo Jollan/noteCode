@@ -24,7 +24,7 @@ type Theme = 'vs' | 'vs-dark' | 'hc-light' | 'hc-black';
     MonacoEditorModule,
     SnackbarComponent,
     LoaderComponent,
-    DimmerComponent
+    DimmerComponent,
   ],
   providers: [NoteService],
   templateUrl: './editor-page.component.html',
@@ -149,7 +149,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
 
   message = signal<{
     content: string;
-    type: 'success' | 'error';
+    type: 'success' | 'error' | 'warning';
   } | null>(null);
 
   editorOptions: editor.IStandaloneEditorConstructionOptions & {
@@ -179,6 +179,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
             this.content = response.data.note.code;
             this.editorOptions = {
               ...this.editorOptions,
+              value: this.content,
               language: response.data.note.language,
             };
           },
@@ -226,6 +227,13 @@ export class EditorPageComponent implements OnDestroy, OnInit {
   }
 
   onShareContent() {
+    if (this.editorOptions.value === this.content.trim()) {
+      this.message.set({
+        content: 'The content has remained the same so why share!',
+        type: 'warning',
+      });
+      return;
+    }
     const body = {
       code: this.content,
       language: this.editorOptions.language,
@@ -247,6 +255,9 @@ export class EditorPageComponent implements OnDestroy, OnInit {
     } else {
       this.subscription.add(
         this.noteService.updateNote(body, this.id).subscribe({
+          next: (response) => {
+            this.editorOptions.value = response.data.note.code;
+          },
           error: (error) => {
             this.message.set({
               content: error.error.message ?? this.defaultErrMsg,

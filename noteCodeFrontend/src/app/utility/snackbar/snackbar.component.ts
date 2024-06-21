@@ -10,5 +10,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SnackbarComponent {
   @Input({ required: true }) message: string;
-  @Input({ required: true }) type: 'success' | 'error';
+  @Input({ required: true }) type: 'success' | 'error' | 'warning';
 }

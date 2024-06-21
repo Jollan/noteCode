@@ -1,9 +1,7 @@
 @import "../../partials/responsives";
 
-$btnw: 100px;
-$btnmw: 120px;
-$btnh: 25px;
-$btnmh: 35px;
+$btnw: 120px;
+$btnh: 35px;
 $btnbg: #ced6e1;
 $ntcblue: #406aff;
 
@@ -86,7 +84,6 @@ $ntcblue: #406aff;
       .dropdowns {
         height: $btnh;
         @include mobile {
-          height: $btnmh;
           justify-content: center;
         }
         display: flex;
@@ -97,9 +94,6 @@ $ntcblue: #406aff;
           background-color: $btnbg;
           font-size: small;
           width: $btnw;
-          @include mobile {
-            width: $btnmw;
-          }
           border-radius: 20px;
           z-index: 1;
           display: flex;
@@ -166,7 +160,6 @@ $ntcblue: #406aff;
         height: $btnh;
         @include mobile {
           width: 80%;
-          height: $btnmh;
           justify-content: center;
         }
         cursor: pointer;
@@ -192,10 +185,6 @@ $ntcblue: #406aff;
         font-size: small;
         width: $btnw;
         height: $btnh;
-        @include mobile {
-          width: $btnmw;
-          height: $btnmh;
-        }
         border: 0;
         border-radius: 20px;
         cursor: pointer;
