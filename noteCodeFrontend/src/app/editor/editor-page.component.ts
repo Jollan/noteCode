@@ -10,7 +10,6 @@ import { NoteService } from '../services/note.service';
 import { SnackbarComponent } from '../utility/snackbar/snackbar.component';
 import { LoaderService } from '../services/loader.service';
 import { LoaderComponent } from '../utility/loader/loader.component';
-import { environment } from '../../environments/environment';
 import { DimmerComponent } from '../utility/dimmer/dimmer.component';
 
 type Theme = 'vs' | 'vs-dark' | 'hc-light' | 'hc-black';
@@ -175,7 +174,7 @@ export class EditorPageComponent implements OnDestroy, OnInit {
         this.noteService.getNote(this.id).subscribe({
           next: (response) => {
             this.loaderService.editorInit.set(false);
-            this.link = `${environment.site}/${this.id}`;
+            this.link = `${location.protocol}//${location.host}${this.router.url}`;
             this.content = response.data.note.code;
             this.editorOptions = {
               ...this.editorOptions,
